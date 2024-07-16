@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Citas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Citas</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Doctor</th>
+            <th>Consultorio</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cita : ${citasView.citasList}">
+            <td th:text="${cita.id}"></td>
+            <td th:text="${cita.getHoraConsultaString()}"></td>
+            <td th:text="${cita.doctor.getNombreCompleto()}"></td>
+            <td th:text="${cita.consultorio.getNombreCompleto()}"></td>
+            <td>
+                <a  class="btn btn-info" th:href="@{'/citas/editar/' + ${cita}}">Editar</a>
+                <a class="btn btn-warning" th:href="@{'/citas/eliminar/' + ${cita}}">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" th:href="@{/citas/nueva}">Nueva Cita</a>
+</div>
+</body>
+</html>
